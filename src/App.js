@@ -10,19 +10,19 @@ const Shapes = () => <Circle center={[120, 50]} radius={35} fillColor="#00FF00" 
 
 const code = new URLSearchParams(window.location.search).get('code')
 
-// const App = (props) => (
-//   <div>
-//     <Login />
-//     <PaperContainer {...props}>
-//       <Circle center={[80, 50]} radius={35} fillColor="red" />
+const App = (props) => (
+  <div>
+    <Login />
+    <PaperContainer {...props}>
+      <Circle center={[80, 50]} radius={35} fillColor="red" />
 
-//       <Layer>
-//         <Shapes />
-//       </Layer>
+      <Layer>
+        <Shapes />
+      </Layer>
       
-//     </PaperContainer>
-//   </div>
-// );
+    </PaperContainer>
+  </div>
+);
 
 function App() {
   return code ? <Dashboard code = {code} /> : <Login />
