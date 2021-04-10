@@ -1,0 +1,22 @@
+{
+  "name": "chewytunes",
+  "version": "1.0.0",
+  "description": "4 crackheads who love panera bread ig",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlirpJ/ChewyTunes.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlirpJ/ChewyTunes/issues"
+  },
+  "homepage": "https://github.com/AlirpJ/ChewyTunes#readme",
+  "dependencies": {
+    "react": "^17.0.2"
+  }
+}
