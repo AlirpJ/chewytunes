@@ -19,7 +19,7 @@
 .bottom-half {
     display: flex;
     width: 100vw;
-    height: 55vh;
+    will-change: height;
     z-index: -1;
 }
 
@@ -49,7 +49,7 @@ h1.bottom {
     flex-flow: column wrap;
 }
 
-.on-top {
+.bottom-half-actions {
     width: 100%;
     height: 100%;
     position: absolute;
