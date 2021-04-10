@@ -1,17 +1,33 @@
-import React from 'react';
-import { PaperContainer, Circle, Layer } from '@psychobolt/react-paperjs'
+import React, { Component } from 'react';
+import paper from 'paper';
 
-const Shapes = () => <Circle center={[120, 50]} radius={35} fillColor="#00FF00" />;
+class App extends Component {
 
-const App = (props) => (
-  <div>
-    <PaperContainer {...props}>
-      <Circle center={[80, 50]} radius={35} fillColor="red" />
-      <Layer>
-        <Shapes />
-      </Layer>
-    </PaperContainer>
-  </div>
-);
+  componentDidMount() {
+    paper.setup('canvas');
+
+    const scriptToLoad = 'a';
+
+    switch (scriptToLoad) {
+      case 'a':
+        require('./wave.js');
+        break;
+      case 'b':
+        require('./b.js');
+        break;
+      default:
+        break;
+
+    }
+  }
+
+  render() {
+    return (
+      <div>
+        <canvas id="canvas"></canvas>
+      </div>
+    );
+  }
+}
 
 export default App;
