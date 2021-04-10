@@ -3,6 +3,7 @@
 .background {
     background-color: #FFD68F;
     position: relative;
+    overflow: hidden;
 }
 
 .break {
@@ -13,12 +14,14 @@
 .top-half {
     display: flex;
     width: 100vw;
-    height: 45vh;
+    height: 2vh;
+    will-change: height;
 }
 
 .bottom-half {
     display: flex;
     width: 100vw;
+    height: 98vh;
     will-change: height;
     z-index: -1;
 }
