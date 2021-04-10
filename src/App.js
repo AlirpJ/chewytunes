@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
-import paper from 'paper';
+import Wave from 'react-wavify';
+import './App.css';
+
 
 class App extends Component {
 
-  componentDidMount() {
-    paper.setup('canvas');
-
-    const scriptToLoad = 'a';
-
-    switch (scriptToLoad) {
-      case 'a':
-        require('./wave.js');
-        break;
-      case 'b':
-        require('./b.js');
-        break;
-      default:
-        break;
-
-    }
-  }
-
   render() {
     return (
-      <div>
-        <canvas id="canvas"></canvas>
+      <div >
+      <Wave style={{transform: [{ rotate: '90deg' }]}}
+        fill='#f79902'
+        paused={false}
+        options={{
+          height: 20,
+          amplitude: 20,
+          speed: 0.25,
+          points: 5
+        }}
+  />
       </div>
     );
   }
