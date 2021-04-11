@@ -70,7 +70,6 @@ async function getRecommendation() {
     let songRecs = [];
     let constraints = await mapFoodToRecs();
     let reccs = await spotifyApi.getRecommendations(constraints)
-    console.log(reccs);
     for (let track of reccs.body.tracks) {
         songRecs.push(track.name, track.artists[0].name, track.external_urls.spotify);
     }
@@ -99,5 +98,47 @@ async function getUserTopArtists() {
     return topArtist;
 }
 
+async function getTopStats() {
+    // this analyzes songs from a users's top 10 
+    // for stats, and then returns a dict of stats
+    // for use in another function to recc food items.
+    let topTracks = await getUserTopTracks();
+    dances = [];
+    energy = [];
+    loudness = [];
+    liveness = [];
+    tempo = [];
+    for (track of topTracks) {
+        let trackFeatures = await spotifyApi.getAudioFeaturesForTrack(track);
+        dances.push(trackFeatures.body.danceability);
+        energy.push(trackFeatures.body.energy);
+        loudness.push(trackFeatures.body.loudness);
+        liveness.push(trackFeatures.body.liveness);
+        tempo.push(trackFeatures.body.tempo);
+    }
+    const average = arr => arr.reduce((sume, el) => sume + el, 0) / arr.length;
+    returnValues = {
+        danceability: average(dances),
+        energy: average(energy),
+        loudness: average(loudness),
+        liveness: average(liveness),
+        tempo: average(tempo)
+    }
+    console.log(returnValues);
+    return returnValues;
+}
+
+async function mapStatsToFlavors(stats) {
+    // stats here is a dicitionary containing the following stats:
+    // danceability
+    // energy
+    // loudness
+    // liveness
+    // tempo
+    // these stats will be used to calculate what kind of music someone should listen to
+    // i.e. high avg tempo -> something more energetic
+    // high loudness -> crunchy shit
+}
 // calls the functions as needed
-getRecommendation();
+// getRecommendation();
+// getTopStats();
