@@ -190,7 +190,7 @@ async function mapStatsToFlavors() {
     // each thing gets recommended and that the project doesn't get stale 
     if (highEnergy) {
         // front end, this is all yours to fuck with. go wild. these are recommendations
-        const highEnergyString = "Seems like you enjoy pretty energetic music! Energetic music tends to bring out the sweeter flavors in food, and 
+        const highEnergyString = "Seems like you enjoy pretty energetic music! Energetic music tends to bring out the sweeter flavors in food, and" 
          + "helps your taste buds detect more of the sweet tones."
          + "Additionally, energetic music tends to be loud."
          + "Loudness, for some reason, tends to bring out the 'crunch' in some foods."
@@ -206,7 +206,7 @@ async function mapStatsToFlavors() {
         return highDanceString
     } else if (loud) {
         const loudString = "Seems like you like lively music!"
-        + "Lively music tends to bring out many of the sweet and sour");
+        + "Lively music tends to bring out many of the sweet and sour"
         + "flavors present in your food. I'm thinking something that"
         + "can get the best of both worlds. How about a salad of some sort?"
         + "Bold flavors are another big thing with lively music, so"
