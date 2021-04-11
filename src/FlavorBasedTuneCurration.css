@@ -4,9 +4,8 @@
   background-color: #4c753f;
 }
 
-html body {
-  height: 100vh;
-  width: 100vw;
+tunesbody {
+  background-color: #4c753f;
 }
 .tunestop {
   font-family: "Raleway", sans-serif;
