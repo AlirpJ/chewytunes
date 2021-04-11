@@ -1,6 +1,8 @@
 import React from 'react'
 import WaveStatus from './WaveStatus'
 
+import './App.css';
+
 import Wave from 'react-wavify';
 import { AwesomeButton } from "react-awesome-button";
 import { useSpring, animated } from 'react-spring'
@@ -60,8 +62,8 @@ export default function NeutralOption({waveStatus, setWaveStatus}) {
       <animated.div class="top-half" style={top_half_props}>
         <TopHalfAnimated onButtonPress={() => setWaveStatus(WaveStatus.WASH_UP)} />
       </animated.div>
-      <div class="background">
-        <BottomHalfAnimated />
+      <div>
+        <BottomHalfAnimated onButtonPress={() => setWaveStatus(WaveStatus.WASH_DOWN)}/>
         <animated.div class="bottom-half" style={bottom_half_props}>
           <Wave
             fill='#4C753F'
