@@ -190,42 +190,46 @@ async function mapStatsToFlavors() {
     // each thing gets recommended and that the project doesn't get stale 
     if (highEnergy) {
         // front end, this is all yours to fuck with. go wild. these are recommendations
-        console.log("Seems like you enjoy pretty energetic music!");
-        console.log("Energetic music tends to bring out the sweeter flavors in food,");
-        console.log("And helps your taste buds detect more of the sweet tones.");
-        console.log("Additionally, energetic music tends to be loud.");
-        console.log("Loudness, for some reason, tends to bring out the 'crunch' in some foods.");
-        console.log("For you, I think I'd recommend a salad.");
-        console.log("Interested in a Panera item? What about a " + getRandom(SUMMERY_ITEMS) + "?");
+        const highEnergyString = "Seems like you enjoy pretty energetic music! Energetic music tends to bring out the sweeter flavors in food, and 
+         + "helps your taste buds detect more of the sweet tones."
+         + "Additionally, energetic music tends to be loud."
+         + "Loudness, for some reason, tends to bring out the 'crunch' in some foods."
+         + "For you, I think I'd recommend a salad."
+         + "Interested in a Panera item? What about a " + getRandom(SUMMERY_ITEMS) + "?"
+         return highEnergyString
     } else if (highDance) {
-        console.log("Seems like you're a fan of dance-y music.");
-        console.log("Your top tracks have a lot of energy in them! I like it!");
-        console.log("Dance-y music and energy tends to lend itself well to");
-        console.log("bold, sweet flavors. For you, I'm thinking something sweet");
-        console.log("Wanna try something from Panera? How about a " + getRandom(SWEET_ITEMS) + "?");
+        const highDanceString = "Seems like you're a fan of dance-y music. "
+        + "Your top tracks have a lot of energy in them! I like it!"
+        + "Dance-y music and energy tends to lend itself well to"
+        + "bold, sweet flavors. For you, I'm thinking something sweet"
+        + "Wanna try something from Panera? How about a " + getRandom(SWEET_ITEMS) + "?"
+        return highDanceString
     } else if (loud) {
-        console.log("Seems like you like lively music!");
-        console.log("Lively music tends to bring out many of the sweet and sour");
-        console.log("flavors present in your food. I'm thinking something that");
-        console.log("can get the best of both worlds. How about a salad of some sort?");
-        console.log("Bold flavors are another big thing with lively music, so");
-        console.log("maybe you'd like to try a BBQ Chicken Salad?");
-        console.log("I hear Panera has a really good one...");
+        const loudString = "Seems like you like lively music!"
+        + "Lively music tends to bring out many of the sweet and sour");
+        + "flavors present in your food. I'm thinking something that"
+        + "can get the best of both worlds. How about a salad of some sort?"
+        + "Bold flavors are another big thing with lively music, so"
+        + "maybe you'd like to try a BBQ Chicken Salad?"
+        + "I hear Panera has a really good one..."
+        return loud
     } else if (speedy) {
-        console.log("You're a fan of fast-paced music, aren't you?");
-        console.log("At least, that's what your top tracks imply.");
-        console.log("Music with a high tempo tends to energize us");
-        console.log("High energy and food don't always go together, according to research");
-        console.log("We tend to eat faster and as a result miss out on a lot of the flavor.");
-        console.log("Funny enough, high energy music also brings out mroe savory flavors");
-        console.log("Sounds like a wonderful pairing with a good soup!");
-        console.log("Now, how about a Panera soup? Let's say... a " + getRandom(SOUPS) + "?");
+        const speedyString =
+        "You're a fan of fast-paced music, aren't you?"
+        "At least, that's what your top tracks imply."
+        "Music with a high tempo tends to energize us"
+        "High energy and food don't always go together, according to research"
+        "We tend to eat faster and as a result miss out on a lot of the flavor."
+        "Funny enough, high energy music also brings out mroe savory flavors"
+        "Sounds like a wonderful pairing with a good soup!"
+        "Now, how about a Panera soup? Let's say... a " + getRandom(SOUPS) + "?"
+        return speedyString
     } else {
-        console.log("Hm...seems like you're into more relaxed music.");
-        console.log("Slower jams, perhaps?");
-        console.log("Slower tunes tend to bring out more subtle flavors.");
-        console.log("Something nice, warm, and savory would probably suit you best.");
-        console.log("What about a " + getRandom(SAVORY_ITEMS) + " from Panera?");
+        + "Hm...seems like you're into more relaxed music."
+        + "Slower jams, perhaps?"
+        + "Slower tunes tend to bring out more subtle flavors."
+        + "Something nice, warm, and savory would probably suit you best."
+        + "What about a " + getRandom(SAVORY_ITEMS) + " from Panera?"
     }
 }
  
