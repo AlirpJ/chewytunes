@@ -40,7 +40,9 @@ function TuneBasedFlavorProfile(props) {
         {top10.map((value, index) => {
           return (
             <div class="unit">
-              <img src={value[0]}></img>
+              <a href={value[3]}>
+                <img src={value[0]}></img> 
+              </a>
               <p key={index}>{value[1] + " - " + value[2]}</p>
             </div>
           );

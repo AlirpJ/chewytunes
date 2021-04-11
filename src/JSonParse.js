@@ -234,7 +234,7 @@ export async function getUserTopSongs(spotifyApi) {
     let songRecs = []
     let songs = await spotifyApi.getMyTopTracks();
     for (const track of songs.body.items) {
-        songRecs.push([track.album.images[1].url, track.name, track.artists[0].name])//, track.external_urls.spotify, track.album.images[1].url])
+        songRecs.push([track.album.images[1].url, track.name, track.artists[0].name, track.external_urls.spotify])
     }
     console.log(songRecs);
     return songRecs;
