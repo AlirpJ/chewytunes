@@ -1,6 +1,6 @@
 const { getCurrentUpdateLanePriority } = require('@psychobolt/react-paperjs/dist/index.dev');
 const SpotifyWebApi = require('spotify-web-api-node')
-const token = "BQDsquOMsaiD4DrcxAytfwsTBPtXfmmRCrTgxs5Q7QlxpLW12viYvmMdxj5Ze_7KH5K5MAb-bxX6V-26_2dn-WoPQW292_Rie0_kUn7ZOVsNjiS-qNZENVxLM5GoIsbtwys59ix6m4c4TqQIkN0nW-tnhElJRLLAU84ss57sSe4uZ2CvjMolpdm1E0-LUr7d0MiDdmllk3heKCakq7xt4Er3dj0nFZMjzlg8tOZLW6yjh1vCqpGBVsV8GvT881g9t49bQy7jBL4PNVjTyoI4"
+const token = "BQBAqCkWvXvh-bW1Y6n2dry1WLIIcRyBFRCJlgPyKlPUbo3pC5VEn5u0RW-H4C-aNIumPlAmtDK1vy-g1ztK3ogiLPg1RgnSSOnB8wnl8DSu1tsDfiPt6vLBGizuMZoqCsXmQrjW10v3gsQ-tHjdNtohYfWVhiko162vkZ_i99DJOrwyODab9AthGZ8Ge2V2QwyB8vZD6YB4TMWYILqWDi0c64OddIZ51TfClvNAAIZubfmmtzjVQDYc1bf8iNGOO-3z1Aa-MbOKur1jr2d5"
 const playlistID = "37i9dQZEVXbLRQDuF5jeBp"
 
 const spotifyApi = new SpotifyWebApi();
@@ -42,7 +42,7 @@ function getRandomGenre(listOfGenres) {
     return listOfGenres[Math.floor((Math.random()*listOfGenres.length))];
 }
 
-function mapFoodToRecs() {
+async function mapFoodToRecs() {
     // will take food items and return an artist, genre, and track to base recommendations 
     // off of. is it possible to grab all of those from a user's top songs? much to think about.
     // current structure of the food item request has a bunch of constraints:
@@ -79,7 +79,7 @@ async function getRecommendation() {
     }
     let reccs = await spotifyApi.getRecommendations(constraints)
     for (let track of reccs.body.tracks) {
-        songRecs.push(track.name, track.artists[0].name);
+        songRecs.push(track.name, track.artists[0].name, track.external_urls.spotify);
     }
     console.log(songRecs);
 }
