@@ -1,6 +1,6 @@
 const { getCurrentUpdateLanePriority } = require('@psychobolt/react-paperjs/dist/index.dev');
 const SpotifyWebApi = require('spotify-web-api-node')
-const token = "BQBAqCkWvXvh-bW1Y6n2dry1WLIIcRyBFRCJlgPyKlPUbo3pC5VEn5u0RW-H4C-aNIumPlAmtDK1vy-g1ztK3ogiLPg1RgnSSOnB8wnl8DSu1tsDfiPt6vLBGizuMZoqCsXmQrjW10v3gsQ-tHjdNtohYfWVhiko162vkZ_i99DJOrwyODab9AthGZ8Ge2V2QwyB8vZD6YB4TMWYILqWDi0c64OddIZ51TfClvNAAIZubfmmtzjVQDYc1bf8iNGOO-3z1Aa-MbOKur1jr2d5"
+const token = "BQBsO7rw73fPTcErhXsZUlb-ianfKbLgadOrqqqRF10hZZo2d4bJnM3Dk3FhzvVZdr_sSNHsrKsmmmPxVtYM1IfsAyAZQPWJp50Vsi55krqTfjTUxHoASp2E9gakUbMr78v_tVSoon1aWRFi4keNqVluMLzPlY6Lw-f88Kt0Q-rUc9WEW0A8szBy-LuJH1RpxiABSc9c9JScgUf3jBjEglKuNHpUNSg7pONFhxhGPSCJvPJsu26yJylLJBQ80tVEF-pLXixKz-_4VsHZ5fQk"
 const playlistID = "37i9dQZEVXbLRQDuF5jeBp"
 
 const spotifyApi = new SpotifyWebApi();
@@ -137,7 +137,7 @@ async function getTopStats() {
     return returnValues;
 }
 
-async function mapStatsToFlavors(stats) {
+async function mapStatsToFlavors() {
     // stats here is a dicitionary containing the following stats:
     // danceability
     // energy
@@ -145,11 +145,22 @@ async function mapStatsToFlavors(stats) {
     // liveness
     // tempo
     // these stats will be used to calculate what kind of music someone should listen to
-    // i.e. high avg tempo -> something more energetic
-    // high loudness -> crunchy shit
-
+    // i.e. high avg tempo -> something more energetic, "sour"
+    // high loudness -> crunchy shit, "umami"
+    // high energy/danceability -> "sweet"
+    let stats = await getTopStats();
+    let highDance = stats.danceability > 0.7 ? true : false
+    let highEnergy = stats.energy > 0.7 ? true : false
+    let loud = stats.loudness > -5 ? true : false
+    let lively = stats.liveness > 0.5 ? true : false
+    let speedy = stats.tempo > 120 ? true : false
+    // here's where we put various checks for stats and recommend various
+    // panera products based on that. i'm probably gonna randomize it a bit so that
+    // each thing gets recommended and that the project doesn't get stale
 }
+ 
 
-// calls the functions as needed
+// calls the functions as needed for testing purposes
 // getRecommendation();
 // getTopStats();
+// mapStatsToFlavors();
