@@ -2,10 +2,12 @@ import React from "react";
 import "./FlavorPage.css";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
+import "./FlavorBasedTuneCurration";
 import { useSpring, animated } from "react-spring";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
+import FlavorBasedTuneCurration from "./FlavorBasedTuneCurration";
 
 var dict = {
   Crunchy: false,
@@ -15,6 +17,13 @@ var dict = {
   Bitter: false,
   Sweet: false,
 };
+function transitionToEnd(props) {
+  const transitions = useTransition({
+    from: { opacity: 1, background: "#FFD68F" },
+    leave: { opacity: 0, delay: 500, background: "#4C753F" },
+  });
+  return <FlavorBasedTuneCurration dictonary={dict}></FlavorBasedTuneCurration>;
+}
 
 function UpdateDict(flavorSelected) {
   switch (flavorSelected) {
@@ -103,7 +112,12 @@ function FlavorPage(props) {
           </div>
           <div class="empty"></div>
           <div class="done">
-            <AwesomeButton type="secondary">Done</AwesomeButton>
+            <AwesomeButton
+              type="secondary"
+              onPress={() => transitionToEnd({ dict })}
+            >
+              Done
+            </AwesomeButton>
           </div>
         </div>
       </body>

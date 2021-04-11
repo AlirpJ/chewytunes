@@ -30,14 +30,22 @@ function TuneBasedFlavorProfile(props) {
   
   return (
     <div class="TunesBackground">
-      <h1 class="tunestop">Here are your delicious tunes</h1>
+      <h1 class="tunestop">Here are your food recommendations!</h1>
       <p>{flavorStats[0]}</p>
-      <p> How about trying Panera's Clasic, Broccoli Cheddar Mac & Cheese! </p>
-      <ul>
+      <p class="bootlicker">How about trying Panera's Classic, Broccoli Cheddar Mac & Cheese!</p>
+      <p>(Here are the tracks we based your food selection on, in case you were curious):</p>
+      <div class="container">
         {top10.map((value, index) => {
-          return <li key={index}>{value}</li>
+          return (
+            <div class="unit">
+              <a href={value[3]}>
+                <img src={value[0]}></img> 
+              </a>
+              <p key={index}>{value[1] + " - " + value[2]}</p>
+            </div>
+          );
         })}
-      </ul>
+      </div>
     </div>
   );
 }
