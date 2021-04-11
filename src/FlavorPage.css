@@ -1,7 +1,7 @@
 .flavorPage {
-  background-color: #ffd68f;
-  position: fixed;
-  overflow: auto;
+  background-color: #ffd68f !important;
+  position: fixed !important;
+  overflow: auto !important;
   top: 0;
   left: 0;
   bottom: 0;
@@ -27,6 +27,7 @@
 .flavor-body {
   background-color: #ffd68f;
 }
+
 .tunestop {
   font-family: "Raleway", sans-serif;
   margin-bottom: 40px;
@@ -37,15 +38,15 @@
 
 .container {
   display: grid;
-  grid-template-rows: 3rem 3rem 3rem;
-  grid-template-columns: 15rem 15rem 15rem;
+  grid-template-rows: 3rem 3rem 3rem !important;
+  grid-template-columns: 15rem 15rem 15rem !important;
   gap: 50% 0%;
   justify-items: center;
   align-items: center;
-  margin-top: 4%;
-  margin-left: 30%;
-  margin-right: 30%;
-  margin-bottom: 12%;
+  margin-top: 25%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: auto;
 }
 
 .aws-btn {

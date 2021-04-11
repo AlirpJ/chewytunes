@@ -34,7 +34,7 @@ function TuneBasedFlavorProfile(props) {
       <p style={{color: "#ffd68f"}}>{flavorStats[0]}</p>
       <p style={{color: "#ffd68f"}} class="bootlicker">How about trying Panera's Classic, Broccoli Cheddar Mac & Cheese!</p>
       <p>(Here are the tracks we based your food selection on, in case you were curious):</p>
-      <div class="container">
+      <div class="grid">
         {top10.map((value, index) => {
           return (
             <div class="unit">

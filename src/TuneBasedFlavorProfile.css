@@ -29,7 +29,7 @@ ul {
     color: #ffd68f;
 }
 
-.container {
+.grid {
     display: grid;
     color: #ffd68f;
     grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
