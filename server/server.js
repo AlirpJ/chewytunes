@@ -1,41 +1,57 @@
-const express = require('express');
-const spotifyWebApi = require('spotify-web-api-node');
+const express = require("express")
+const cors = require("cors")
+const bodyParser = require("body-parser")
+const SpotifyWebApi = require("spotify-web-api-node")
+
 const app = express()
+app.use(cors())
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
-var client_id = '992f2aaaf07c467fb5fd757f91391847'; // Your client id
-var client_secret = 'no_secrets_here'; // Your secret
-// var client_secret = document.getElementById("client_secret").value;
-var redirect_uri = 'http://localhost:3000'; // Your redirect uri
+app.post("/refresh", (req, res) => {
+  const refreshToken = req.body.refreshToken
+  const spotifyApi = new SpotifyWebApi({
+    redirectUri: process.env.REDIRECT_URI,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+    refreshToken,
+  })
 
-
-
-// Logging in!
-// authorizationCodeGrant: Given proper code, provide access token. Otherwise, send status 400
-app.post('/login', (req, res) => {
-    const code = req.body.code
-    const spotifyWebApi = new spotifyWebApi({
-        redirectUri: redirect_uri,
-        clientId: client_id,
-        clientSecret: cliend_secret
-    })
-    spotifyApi.authorizationCodeGrant(code)
+  spotifyApi
+    .refreshAccessToken()
     .then(data => {
-        res.json({
-            accessToken: data.body.access_token, //accessToken ?
-            refreshToken: data.body.refresh_token,
-            expiresIn: data.body.expires_in
-        })
+      res.json({
+        accessToken: data.body.accessToken,
+        expiresIn: data.body.expiresIn,
+      })
     })
-    .catch(() => {
-        res.sendStatus(400)
+    .catch(err => {
+      console.log(err)
+      res.sendStatus(400)
     })
 })
 
-// app.get('/login', function(req, res) {
-//   var scopes = 'user-read-private user-read-email';
-//   res.redirect('https://accounts.spotify.com/authorize' +
-//     '?response_type=code' +
-//     '&client_id=' + client_id +
-//     (scopes ? '&scope=' + encodeURIComponent(scopes) : '') +
-//     '&redirect_uri=' + encodeURIComponent(redirect_uri));
-//   });
+app.post("/login", (req, res) => {
+  const code = req.body.code
+  const spotifyApi = new SpotifyWebApi({
+    redirectUri: process.env.REDIRECT_URI,
+    clientId: process.env.CLIENT_ID,
+    clientSecret: process.env.CLIENT_SECRET,
+  })
+
+  spotifyApi
+    .authorizationCodeGrant(code)
+    .then(data => {
+      res.json({
+        accessToken: data.body.access_token,
+        refreshToken: data.body.refresh_token,
+        expiresIn: data.body.expires_in,
+      })
+    })
+    .catch(err => {
+      res.sendStatus(400)
+    })
+})
+
+
+//app.listen(3001)
