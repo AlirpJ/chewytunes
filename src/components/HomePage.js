@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React from "react";
 import Wave from "react-wavify";
 import {
   BrowserRouter as Router,
@@ -6,18 +6,14 @@ import {
   Route,
   NavLink,
 } from "react-router-dom";
-import "./App.css";
-import useMeasure from "./useMeasure";
+import "./HomePage.css";
 import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
-import "./my-button.css";
+import "../my-button.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { useSpring, animated } from "react-spring";
-import TunesPage from "./components/TunesPage";
-import HomePage from "./components/HomePage";
-/*
 var fly_up = false;
 var fly_down = false;
 
@@ -103,25 +99,9 @@ function BottomHalfAnimated() {
       </AwesomeButton>
     </animated.div>
   );
-}*/
-
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/tunespage">
-              <TunesPage />
-            </Route>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    );
-  }
+}
+function HomePage(props) {
+  return <WaveWash />;
 }
 
-export default App;
+export default HomePage;

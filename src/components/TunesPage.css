@@ -1,0 +1,77 @@
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap");
+
+.TunesBackground {
+  background-color: #4c753f;
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+html body {
+  height: 100vh;
+  width: 100vw;
+}
+.tunestop {
+  font-family: "Raleway", sans-serif;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  color: #ffd68f;
+  text-align: center;
+}
+
+.songlist {
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.songTitle {
+  font-family: "Raleway", sans-serif;
+}
+
+.artist {
+  justify-content: center;
+  font-family: "Raleway", sans-serif;
+  float: left;
+  word-wrap: normal;
+}
+
+.details {
+  float: right;
+  flex-direction: row;
+  overflow-wrap: normal;
+  font-family: "Raleway", sans-serif;
+}
+
+table {
+  margin-left: 20%;
+  margin-right: 20%;
+}
+
+th,
+td {
+  padding: 30px;
+}
+.item1 {
+  justify-self: center;
+}
+.songcover-item {
+  align-items: center;
+  justify-self: center;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr;
+  justify-items: center;
+  align-items: center;
+  margin-left: 20%;
+  margin-right: 20%;
+  margin-bottom: 30%;
+}
