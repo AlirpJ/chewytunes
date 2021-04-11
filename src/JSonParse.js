@@ -50,12 +50,15 @@ async function mapFoodToRecs() {
     //    crunchy or soft
     //    etc.
     // These stats will all be adjusted based upon selected buttons from a user
+    let topTracks = await getUserTopTracks();
+    let topArtists = await getUserTopArtists();
     let constraints = {
         seed_genres: await getGenres(),
-        seed_tracks: await getUserTopTracks(),
-        seed_artist: await getUserTopArtist(),
+        seed_tracks: topTracks[0],
+        seed_artists: topArtists[0],
         min_popularity: 50
     };
+    return constraints;
     // here's where we implement the logic from the buttons c:
 }
 
@@ -65,19 +68,9 @@ async function getRecommendation() {
     // constraints form above. the constraints come from mapFoodToRecs()
     // TODO: replace constraints here with result from mapFoodToRecs()
     let songRecs = [];
-    let constraints = {
-        seed_genres: await getGenres(),
-        seed_tracks: [await getUserTopTracks()],
-        seed_artists: [await getUserTopArtist()],
-        min_popularity: 50,
-        target_danceability: 0.30,
-        target_energy: 0.5,
-        target_liveness: 0.5,
-        target_loudness: 0.5,
-        target_tempo: 0.5,
-        limit:  1
-    }
+    let constraints = await mapFoodToRecs();
     let reccs = await spotifyApi.getRecommendations(constraints)
+    console.log(reccs);
     for (let track of reccs.body.tracks) {
         songRecs.push(track.name, track.artists[0].name, track.external_urls.spotify);
     }
@@ -86,19 +79,24 @@ async function getRecommendation() {
 
 // grabs a user's top track to seed the recommendation
 async function getUserTopTracks() {
-    let topTrack = '';
-    const topTracks = await spotifyApi.getMyTopTracks();
-    topTrack = topTracks.body.items[0].id;
+    let topTrack = [];
+    const topTracks = await spotifyApi.getMyTopTracks({limit : 10});
+    for (let track of topTracks.body.items) {
+        topTrack.push(track.id);
+    }
     console.log(topTrack);
     return topTrack;
 }
 
 // grabs a user's top artist to seed the reccomendation
-async function getUserTopArtist() {
-    let topArtist = '';
-    const topTracks = await spotifyApi.getMyTopTracks();
-    topArtist = topTracks.body.items[0].artists[0].id;
+async function getUserTopArtists() {
+    let topArtist = [];
+    const topArtists = await spotifyApi.getMyTopArtists({limit : 10});
+    for (let artist of topArtists.body.items) {
+        topArtist.push(artist.id);
+    }
     console.log(topArtist);
+    return topArtist;
 }
 
 // calls the functions as needed
