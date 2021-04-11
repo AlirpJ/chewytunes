@@ -1,6 +1,6 @@
 const { getCurrentUpdateLanePriority } = require('@psychobolt/react-paperjs/dist/index.dev');
 const SpotifyWebApi = require('spotify-web-api-node')
-const token = "BQCuwFjcHPQv7M-vxC7kXotw1b9LDjA8qJHuNQtuAh8R0C7wDxuJRq6gc6MwIC9Yiv1XM9Rf1B26Es1EDQSuCeefYAf-WXZkJOJs4fcZt4SBvoDt4T0LcTEX9e_fskmvDVuFmC6Qul5QlDXsOk62LO4XwTEdacCrzvbwV_fmF8V36vfl3BA1IWrh1EMZNZO7M7lzALe-d3O-pcYSXTX7T0kIwcAPhezNCMYQnkTewIEsbkhFz6qLQ-QDZBK_cem1Yq--mvxp9jt3oUBoZoqH"
+const token = "BQAJrc9skfHoLOoEvy3BLds__TXA8AkVByR8bIQrhUjbJr9XCFUXs0G92Y1icPsHjykbnIV9flCye2I10HW84JYKg-RSudnPn8vxUv0VtFLlK9gCeBoeUhrPP8jh0FeBEXL0mFIAzl5Q9jR4iPR0QRTqXH1XFusaCXy2WdSVWvS14r3d2lR8pV6UbpEtChb7haPeu2BGErZyEEwtFhYhH85KS2K7WEVJk1SKToxPqc-G8uQF530_iRcKXQbBK4AHWg4uqa4VPnOdjexlfQrd"
 const playlistID = "37i9dQZEVXbLRQDuF5jeBp"
 
 const spotifyApi = new SpotifyWebApi();
@@ -229,6 +229,16 @@ async function mapStatsToFlavors() {
     }
 }
  
+async function getUserTopSongs() {
+    let songRecs = []
+    let songs = await spotifyApi.getMyTopTracks();
+    for (track of songs.body.items) {
+        songRecs.push([track.name, track.artists[0].name, track.external_urls.spotify, track.album.images[1].url])
+    }
+    console.log(songRecs);
+    return songRecs;
+}
+
 // panera bread menu items lmfao
 const SAVORY_ITEMS = [
     "Pepperoni Flatbread Pizza",
@@ -307,6 +317,7 @@ const SUMMERY_ITEMS = [
 
 // calls the functions as needed for testing purposes
 // getTop50();
-getRecommendation();
+// getRecommendation();
 // getTopStats();
-mapStatsToFlavors();
+// mapStatsToFlavors();
+getUserTopSongs();
