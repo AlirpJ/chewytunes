@@ -7,10 +7,10 @@ import 'bootstrap/dist/css/bootstrap.css'
 
 const Shapes = () => <Circle center={[120, 50]} radius={35} fillColor="#00FF00" />;
 
-var access_token = new URLSearchParams(window.location.hash).get('#access_token');
+const code = new URLSearchParams(window.location.search).get('code')
 
 function App() {
-  return access_token ? <Dashboard access_token = {access_token} /> : <Login />
+  return code ? <Dashboard code = {code} /> : <Login />
 }
 
 export default App;
