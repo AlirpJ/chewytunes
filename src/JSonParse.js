@@ -30,7 +30,7 @@ async function getGenres() {
         } else {
             await spotifyApi.getAvailableGenreSeeds()
                 .then(function(result) {
-                    genre.push(getRandomGenre(result.body.genres));
+                    genre.push(getRandom(result.body.genres));
                 })
         }
     }
@@ -79,7 +79,7 @@ async function getRecommendation() {
     let constraints = await mapFoodToRecs();
     let reccs = await spotifyApi.getRecommendations(constraints)
     for (let track of reccs.body.tracks) {
-        songRecs.push(track.name, track.artists[0].name, track.external_urls.spotify);
+        songRecs.push([track.name, track.artists[0].name, track.external_urls.spotify, track.album.images[1].url]);
     }
     console.log(songRecs);
 }
