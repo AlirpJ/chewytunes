@@ -47,7 +47,7 @@ export function getRandom(list) {
 // takes in flavors from front-end and maps them to various stats, which
 // are then used to calculate recommendations for someone's songs.
 // reccs are also based upon a user's personal taste so it's not totally ass
-async function mapFoodToRecs(spotifyApi, sweet, salty, crunchy) {
+export async function mapFoodToRecs(spotifyApi, sweet, salty, crunchy) {
     // will take food items and return an artist, genre, and track to base recommendations 
     // off of. is it possible to grab all of those from a user's top songs? much to think about.
     // current structure of the food item request has a bunch of constraints:

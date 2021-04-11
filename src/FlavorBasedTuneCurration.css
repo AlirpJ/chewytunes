@@ -12,26 +12,44 @@
 }
 
 .image-item {
+  margin-top: 30px;
   margin: 20px;
-  flex-grow:1;
 }
 
-.titles {
-  flex-grow: 4;
+.unit {
+  margin-top: 20px;
 }
 
 .TunesBackground {
   background-color: #ffd68f;
 }
 
-.tunesbody {
-  background-color: #ffd68f;
+.description {
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 30px;
+  font-size: 17px;
+  text-align: center;
+  color: #4c753f;
+}
+
+
+p {
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+  padding:0;
+  margin-left: 5%;
+  margin-right: 5%;
+  color: #4c753f;
+  text-align: center;
+}
+
+p.title {
+  margin:0;
 }
 
 .tunestop {
   font-family: "Raleway", sans-serif;
-  margin-bottom: 40px;
-  margin-top: 40px;
   color: #4c753f;
   text-align: center;
 }
@@ -43,20 +61,11 @@
 }
 
 .artist {
-  /* justify-content: center; */
+  padding: 0;
+  margin: 0;
+  justify-content: center;
   font-family: "Raleway", sans-serif;
-  float: left;
-  word-wrap: normal;
-  font-size: 20px;
-}
-
-.details {
-  margin-right: 10%;
-  margin-left: 10%;
-  float: right;
-  flex-direction: row;
-  font-family: "Raleway", sans-serif;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 .item1 {
@@ -70,17 +79,15 @@
 
 .container {
   display: grid;
-  color: #ffd68f;
+  color: #4c753f;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-  grid-template-columns: 0.7fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
   justify-self: center;
   justify-content: space-evenly;
-  justify-items: left;
   align-content: center;
-  align-items: center;
   margin-left: auto;
   margin-right: auto;
-  margin-bottom: 30%;
-  min-width: 50%;
-  min-height: 70%;
+  margin-top: auto;
+  /* margin-bottom: 30%; */
+  max-width: 100%;
 }
