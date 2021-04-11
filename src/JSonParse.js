@@ -11,12 +11,11 @@ spotifyApi.setAccessToken(token);
 // else to do with it for now
 async function getTop50() {
     const playlistData = await spotifyApi.getPlaylist(playlistID);
-    tracks = {}
+    tracks = []
     for (let track of playlistData.body.tracks.items) {
-        let trackID = track.track.id;
-        let trackName = track.track.name;
-        tracks[trackName] = trackID
+        tracks.push(track.track.id);
     }
+    console.log(tracks);
     return tracks;
 }
 
@@ -148,19 +147,94 @@ async function mapStatsToFlavors() {
     // i.e. high avg tempo -> something more energetic, "sour"
     // high loudness -> crunchy shit, "umami"
     // high energy/danceability -> "sweet"
+    // TODO: fix these constraints to make a bit more sense wrt general population
+    // ---------------------------------------------------------------------------
+    // all of these stats are based on averages obtained from running
+    // getTopStats() on the top 50 tracks playlist from spotify 
     let stats = await getTopStats();
-    let highDance = stats.danceability > 0.7 ? true : false
-    let highEnergy = stats.energy > 0.7 ? true : false
-    let loud = stats.loudness > -5 ? true : false
-    let lively = stats.liveness > 0.5 ? true : false
-    let speedy = stats.tempo > 120 ? true : false
+    let highDance = stats.danceability > 0.65 ? true : false
+    let highEnergy = stats.energy > 0.65 ? true : false
+    let loud = stats.loudness > -6.3 ? true : false
+    let lively = stats.liveness > 0.2 ? true : false
+    let speedy = stats.tempo > 120 ? true : false 
     // here's where we put various checks for stats and recommend various
     // panera products based on that. i'm probably gonna randomize it a bit so that
     // each thing gets recommended and that the project doesn't get stale
 }
  
+// panera bread menu items lmfao
+const PANERA_MENU_FLATBREADS = [
+    "Pepperoni Flatbread Pizza",
+    "Chipotle Chicken & Bacon Flatbread Pizza",
+    "Margherita Flatbread Pizza",
+    "Four Cheese Flatbread Pizza",
+    "Cheese Flatbread Pizza",
+]
 
+const PANERA_MENU_SANDWICHES = [
+    "Bacon Turkey Bravo",
+    "Smokehouse BBQ Chicken",
+    "Chipotle Chicken Avocado Melt",
+    "Classic Grilled Cheese",
+    "Roasted Turkey & Avocado BLT",
+    "Toasted Frontega Chicken",
+    "Toasted Steak & White Chedder",
+    "Napa Almond Chicken Salad",
+    "Tuna Salad",
+    "Mediterranean Veggie",
+    "Modern Caprese"
+]
+
+const PANERA_MENU_SALADS = [
+    "Strawberry Poppyseed Salad with Chicken",
+    "Green Goddess Cobb Salad with Chicken",
+    "Fuji Apple Salad with Chicken",
+    "Caesar Salad",
+    "Caesar Salad with Chicken",
+    "Greek Salad",
+    "Asian Sesame Salad with Chicken",
+    "Southwest Chile Lime Ranch Salad with Chicken",
+    "BBQ Chicken Salad"
+]
+
+const PANERA_MENU_BOWLS = [
+    "Teriyaki Chicken & Broccoli Bowl",
+    "Baja Bowl with Chicken",
+    "Mediterranean Bowl with Chicken",
+    "Baja Bowl",
+    "Mediterranean Bowl"
+]
+
+const PANERA_MENU_SOUPS = [
+    "Mac & Cheese",
+    "Broccoli Cheddar Mac & Cheese",
+    "Summer Corn Cheddar",
+    "Broccoli Cheddar Soup",
+    "Homestyle Chicken Noodle Soup",
+    "Creamy Tomato Soup",
+    "Cream of Chicken & Wild Rice Soup",
+    "Turkey Chili",
+    "Bistro French Onion Soup",
+    "Ten Vegetable Soup"
+]
+
+const PANERA_MENU_DESSERTS = [
+    "Orange Scone",
+    "Blueberry Scone",
+    "Blueberry Muffin",
+    "Chocolate Chip Muffie",
+    "Cranberry Orange Muffin",
+    "Pumpkin Muffin",
+    "Chocolate Chipper Cookie",
+    "Kitchen Sink Cookie",
+    "Candy Cookie",
+    "Cinnamon Roll",
+    "Bear Claw",
+    "Pecan Braid",
+    "Chocolate Croissant"
+]
 // calls the functions as needed for testing purposes
+// getTop50();
 // getRecommendation();
 // getTopStats();
 // mapStatsToFlavors();
