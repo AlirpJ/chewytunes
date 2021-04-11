@@ -82,6 +82,7 @@ async function getRecommendation() {
         songRecs.push([track.name, track.artists[0].name, track.external_urls.spotify, track.album.images[1].url]);
     }
     console.log(songRecs);
+    return songRecs;
 }
 
 // grabs a user's top 10 tracks
@@ -278,6 +279,6 @@ const SUMMERY_ITEMS = [
 
 // calls the functions as needed for testing purposes
 // getTop50();
-// getRecommendation();
+getRecommendation();
 // getTopStats();
 mapStatsToFlavors();
