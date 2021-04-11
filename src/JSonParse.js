@@ -25,7 +25,7 @@ export async function getTop50(spotifyApi) {
 async function getGenres(spotifyApi) {
     let genre = [];
     for (var i = 0; i < 3; i++) {
-        if (Math.random() > 0.33) {
+        if (Math.random() > 0.66) {
             genre.push('pop');
         } else {
             await spotifyApi.getAvailableGenreSeeds()
@@ -221,7 +221,7 @@ export async function mapStatsToFlavors(spotifyApi) {
         + " High energy and food don't always go together, according to research. "
         + " We tend to eat faster and as a result miss out on a lot of the flavor."
         + " Funny enough, high energy music also brings out more savory flavors!"
-        + " Sounds like a wonderful pairing with a good soup..."
+        + " Sounds like a wonderful pairing with a good soup..  ."
         return [speedyString, SOUPS]
     } else {
         const savoryString = "Hm...seems like you're into more relaxed music. "
