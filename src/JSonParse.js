@@ -215,11 +215,11 @@ export async function mapStatsToFlavors(spotifyApi) {
     } else if (speedy) {
         const speedyString = "You're a fan of fast-paced music, aren't you?"
         + " At least, that's what your top tracks imply."
-        + " Music with a high tempo tends to energize us"
-        + " High energy and food don't always go together, according to research"
+        + " Music with a high tempo tends to energize us. "
+        + " High energy and food don't always go together, according to research. "
         + " We tend to eat faster and as a result miss out on a lot of the flavor."
-        + " Funny enough, high energy music also brings out more savory flavors"
-        + " Sounds like a wonderful pairing with a good soup!"
+        + " Funny enough, high energy music also brings out more savory flavors!"
+        + " Sounds like a wonderful pairing with a good soup..."
         return [speedyString, SOUPS]
     } else {
         const savoryString = "Hm...seems like you're into more relaxed music. "
