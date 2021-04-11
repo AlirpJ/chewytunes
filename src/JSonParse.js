@@ -64,24 +64,24 @@ async function mapFoodToRecs(sweet, salty, crunchy) {
         energy = 0.7;
         loudness = -6;
         danceability = 0.65;
-        console.log("Sweet foods are complimented well by higher energy and higher pitched music.");
+        console.log("Sweet foods are complimented well by higher energy and higher pitched music. ");
         console.log("As a result, we're recommending some really high energy music that might suit your fancy.");
     }
     if (salty) {
         loudness = -5;
         energy = 0.45;
         danceability = 0.5;
-        console.log("Salty foods are a good choice!");
-        console.log("Savory, salty foods are best copmlimented by more subtle, calming music.");
-        console.log("Spotify has 'energy' stats for tracks, which rate how much of a jam a song can be.");
-        console.log("We're gonna recommend some lower-energy tracks to really bring out the savory flavors in your meal.");
+        console.log("Salty foods are a good choice! ");
+        console.log("Savory, salty foods are best copmlimented by more subtle, calming music. ");
+        console.log("Spotify has 'energy' stats for tracks, which rate how much of a jam a song can be. ");
+        console.log("We're gonna recommend some lower-energy tracks to really bring out the savory flavors in your meal. ");
         console.log("Trust me though, that doesn't make them any less of a bop!");
     }
     if (crunchy) {
         loudness = -4;
-        console.log("Seems you like crunchy foods!");
-        console.log("Believe it or not, louder music helps amplify the 'crunch' you feel.");
-        console.log("We're recommending some tracks based on how much 'loudness' Spotify ranks them.");
+        console.log("Seems you like crunchy foods! ");
+        console.log("Believe it or not, louder music helps amplify the 'crunch' you feel. ");
+        console.log("We're recommending some tracks based on how much 'loudness' Spotify ranks them. Get ready for some absolute bangers!!");
     }
     let constraints = {
         seed_genres: await getGenres(),
@@ -190,15 +190,15 @@ export async function mapStatsToFlavors(spotifyApi) {
     if (highEnergy) {
         // front end, this is all yours to fuck with. go wild. these are recommendations
         const highEnergyString = "Seems like you enjoy pretty energetic music! Energetic music tends to bring out the sweeter flavors in food, and" 
-         + "helps your taste buds detect more of the sweet tones."
-         + "Additionally, energetic music tends to be loud."
-         + "Loudness, for some reason, tends to bring out the 'crunch' in some foods."
-         + "For you, I think I'd recommend a salad."
+         + "helps your taste buds detect more of the sweet tones. "
+         + "Additionally, energetic music tends to be loud. "
+         + "Loudness, for some reason, tends to bring out the 'crunch' in some foods. "
+         + "For you, I think I'd recommend a salad. "
          + "Interested in a Panera item? What about a "
          return [highEnergyString, SUMMERY_ITEMS]
     } else if (highDance) {
         const highDanceString = "Seems like you're a fan of dance-y music. "
-        + "Your top tracks have a lot of energy in them! I like it!"
+        + "Your top tracks have a lot of energy in them! I like it! "
         + "Dance-y music and energy tends to lend itself well to"
         + "bold, sweet flavors. For you, I'm thinking something sweet"
         + "Wanna try something from Panera? How about a "
@@ -207,7 +207,7 @@ export async function mapStatsToFlavors(spotifyApi) {
         const loudString = "Seems like you like lively music!"
         + "Lively music tends to bring out many of the sweet and sour"
         + "flavors present in your food. I'm thinking something that"
-        + "can get the best of both worlds. How about a salad of some sort?"
+        + "can get the best of both worlds. How about a salad of some sort? "
         + "Bold flavors are another big thing with lively music, so"
         + "maybe you'd like to try a BBQ Chicken Salad?"
         + "I hear Panera has a really good one..."
@@ -217,16 +217,16 @@ export async function mapStatsToFlavors(spotifyApi) {
         + "At least, that's what your top tracks imply."
         + "Music with a high tempo tends to energize us"
         + "High energy and food don't always go together, according to research"
-        + "We tend to eat faster and as a result miss out on a lot of the flavor."
+        + "We tend to eat faster and as a result miss out on a lot of the flavor. "
         + "Funny enough, high energy music also brings out more savory flavors"
-        + "Sounds like a wonderful pairing with a good soup!"
+        + "Sounds like a wonderful pairing with a good soup! "
         + "Now, how about a Panera soup? Let's say... a "
         return [speedyString, SOUPS]
     } else {
-        const savoryString = "Hm...seems like you're into more relaxed music."
-        + "Slower jams, perhaps?"
-        + "Slower tunes tend to bring out more subtle flavors."
-        + "Something nice, warm, and savory would probably suit you best."
+        const savoryString = "Hm...seems like you're into more relaxed music. "
+        + "Slower jams, perhaps? "
+        + "Slower tunes tend to bring out more subtle flavors. "
+        + "Something nice, warm, and savory would probably suit you best. "
         + "What about a "
         return [savoryString, SAVORY_ITEMS]
     }
