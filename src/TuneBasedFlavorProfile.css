@@ -14,6 +14,16 @@ p {
     margin-left: 5%;
     margin-right: 5%;
     color: #ffd68f;
+    text-align: center;
+}
+
+b {
+    font-family: "Raleway", sans-serif;
+    font-size: 20px;
+    margin-left: 5%;
+    margin-right: 5%;
+    color: #ffd68f;
+    text-align: center;
 }
 
 ul {
@@ -49,4 +59,9 @@ img {
     height: auto;
     border-radius: 50%;
     margin-bottom: 7px;
+}
+
+.bootlicker {
+    font-size: 25px;
+    font-style: bold;
 }

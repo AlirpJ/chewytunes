@@ -34,7 +34,7 @@ function TuneBasedFlavorProfile(props) {
     <div class="TunesBackground">
       <h1 class="tunestop">Here are your food recommendations!</h1>
       <p>{flavorStats[0]}</p>
-      <p>How about trying Panera's Classic, Broccoli Cheddar Mac & Cheese! </p>
+      <p class="bootlicker">How about trying Panera's Classic, Broccoli Cheddar Mac & Cheese!</p>
       <p>(Here are the tracks we based your food selection on, in case you were curious):</p>
       <div class="container">
         {top10.map((value, index) => {
