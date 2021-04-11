@@ -47,7 +47,7 @@ export function getRandom(list) {
 // takes in flavors from front-end and maps them to various stats, which
 // are then used to calculate recommendations for someone's songs.
 // reccs are also based upon a user's personal taste so it's not totally ass
-async function mapFoodToRecs(sweet, salty, crunchy) {
+async function mapFoodToRecs(spotifyApi, sweet, salty, crunchy) {
     // will take food items and return an artist, genre, and track to base recommendations 
     // off of. is it possible to grab all of those from a user's top songs? much to think about.
     // current structure of the food item request has a bunch of constraints:
@@ -55,36 +55,37 @@ async function mapFoodToRecs(sweet, salty, crunchy) {
     //    crunchy or soft
     //    etc.
     // These stats will all be adjusted based upon selected buttons from a user
-    const topTracks = await getUserTopTracks();
-    const topArtists = await getUserTopArtists();
-    const energy = 0;
-    const loudness = 0;
-    const danceability = 0;
+    const topTracks = await getUserTopTracks(spotifyApi);
+    const topArtists = await getUserTopArtists(spotifyApi);
+    var energy = 0;
+    var loudness = 0;
+    var danceability = 0;
+    var return_text = "";
     if (sweet) {
         energy = 0.7;
         loudness = -6;
         danceability = 0.65;
-        console.log("Sweet foods are complimented well by higher energy and higher pitched music. ");
-        console.log("As a result, we're recommending some really high energy music that might suit your fancy.");
+        return_text = "Sweet foods are complimented well by higher energy and higher pitched music. "
+        + "As a result, we're recommending some really high energy music that might suit your fancy."
     }
     if (salty) {
         loudness = -5;
         energy = 0.45;
         danceability = 0.5;
-        console.log("Salty foods are a good choice! ");
-        console.log("Savory, salty foods are best copmlimented by more subtle, calming music. ");
-        console.log("Spotify has 'energy' stats for tracks, which rate how much of a jam a song can be. ");
-        console.log("We're gonna recommend some lower-energy tracks to really bring out the savory flavors in your meal. ");
-        console.log("Trust me though, that doesn't make them any less of a bop!");
+        return_text = "Salty foods are a good choice! "
+        + "Savory, salty foods are best copmlimented by more subtle, calming music. "
+        + "Spotify has 'energy' stats for tracks, which rate how much of a jam a song can be. "
+        + "We're gonna recommend some lower-energy tracks to really bring out the savory flavors in your meal. "
+        + "Trust me though, that doesn't make them any less of a bop!"
     }
     if (crunchy) {
         loudness = -4;
-        console.log("Seems you like crunchy foods! ");
-        console.log("Believe it or not, louder music helps amplify the 'crunch' you feel. ");
-        console.log("We're recommending some tracks based on how much 'loudness' Spotify ranks them. Get ready for some absolute bangers!!");
+        const crunchyText = "Seems you like crunchy foods! "
+        + "Believe it or not, louder music helps amplify the 'crunch' you feel. "
+        + "We're recommending some tracks based on how much 'loudness' Spotify ranks them. Get ready for some absolute bangers!!"
     }
     let constraints = {
-        seed_genres: await getGenres(),
+        seed_genres: await getGenres(spotifyApi),
         seed_tracks: topTracks[0],
         seed_artists: topArtists[0],
         min_popularity: 50,
@@ -92,21 +93,22 @@ async function mapFoodToRecs(sweet, salty, crunchy) {
         target_energy: energy,
         target_danceability: danceability
     };
-    return constraints;
+    return {constr: constraints, txt: return_text};
     // here's where we implement the logic from the buttons c:
 }
 
 // uses users music taste and front-end flavor selection to generate a profile of music
 // recommendations to enchance user's ability to taste...?
 // i still can't believe this is real
-async function getRecommendation(spotifyApi, sweet, salty, crunchy) {
+export async function getRecommendation(spotifyApi, sweet, salty, crunchy) {
     // take in an artist, genre, and track, and generate recs based on those
     // obtain those from a user's top tracks in combination with food-based
     // constraints form above. the constraints come from mapFoodToRecs()
     // TODO: replace constraints here with result from mapFoodToRecs()
     let songRecs = [];
-    let constraints = await mapFoodToRecs(sweet, salty, crunchy);
-    let reccs = await spotifyApi.getRecommendations(constraints)
+    let foodConstraints = await mapFoodToRecs(spotifyApi, sweet, salty, crunchy);
+    let text = foodConstraints.txt
+    let reccs = await spotifyApi.getRecommendations(foodConstraints.constr)
     for (let track of reccs.body.tracks) {
         songRecs.push([track.name, track.artists[0].name, track.external_urls.spotify, track.album.images[1].url]);
     }

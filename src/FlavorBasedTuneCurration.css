@@ -1,37 +1,44 @@
 @import url("https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap");
 
-html {
+/* html {
   width: 100%;
   height: 100%;
+} */
+
+.three-way {
+  display: flex;
+  align-items: center;
+  align-content:center;
+}
+
+.image-item {
+  margin: 20px;
+  flex-grow:1;
+}
+
+.titles {
+  flex-grow: 4;
 }
 
 .TunesBackground {
-  background-color: #4c753f;
+  background-color: #ffd68f;
 }
 
 .tunesbody {
-  background-color: #4c753f;
+  background-color: #ffd68f;
 }
 
 .tunestop {
   font-family: "Raleway", sans-serif;
   margin-bottom: 40px;
   margin-top: 40px;
-  color: #ffd68f;
+  color: #4c753f;
   text-align: center;
 }
 
-.songlist {
-  list-style-type: none;
-  /* justify-content: center; */
-  /* align-items: center; */
-  margin: 0;
-  padding: 0;
-  overflow: hidden;
-}
 .songTitle {
   font-family: "Raleway", sans-serif;
-  color: #ffd68f;
+  color: #4c753f;
   font-size: 30px;
 }
 
@@ -44,9 +51,10 @@ html {
 }
 
 .details {
+  margin-right: 10%;
+  margin-left: 10%;
   float: right;
   flex-direction: row;
-  overflow-wrap: normal;
   font-family: "Raleway", sans-serif;
   font-size: 20px;
 }

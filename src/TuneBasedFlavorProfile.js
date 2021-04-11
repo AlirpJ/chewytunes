@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
-import "./FlavorBasedTuneCurration.css";
-import SamplePhoto from "./logo192.png";
+import "./TuneBasedFlavorProfile.css";
 import { mapStatsToFlavors, getUserTopSongs, getRandom } from "./JSonParse"
 const SpotifyWebApi = require('spotify-web-api-node')
 
@@ -27,7 +26,6 @@ function TuneBasedFlavorProfile(props) {
     } catch (e) {
       console.error(e);
     }
-
   }, [])
   
   return (
