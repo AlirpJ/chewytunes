@@ -99,13 +99,13 @@ async function mapFoodToRecs(sweet, salty, crunchy) {
 // uses users music taste and front-end flavor selection to generate a profile of music
 // recommendations to enchance user's ability to taste...?
 // i still can't believe this is real
-async function getRecommendation() {
+async function getRecommendation(sweet, salty, crunchy) {
     // take in an artist, genre, and track, and generate recs based on those
     // obtain those from a user's top tracks in combination with food-based
     // constraints form above. the constraints come from mapFoodToRecs()
     // TODO: replace constraints here with result from mapFoodToRecs()
     let songRecs = [];
-    let constraints = await mapFoodToRecs();
+    let constraints = await mapFoodToRecs(sweet, salty, crunchy);
     let reccs = await spotifyApi.getRecommendations(constraints)
     for (let track of reccs.body.tracks) {
         songRecs.push([track.name, track.artists[0].name, track.external_urls.spotify, track.album.images[1].url]);
