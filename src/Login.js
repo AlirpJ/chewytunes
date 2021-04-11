@@ -1,14 +1,12 @@
 import React from 'react'
 import { Container } from "react-bootstrap"
-const SpotifyWebApi = require('spotify-web-api-node')
-// const SpotifyApi = require("spotify-web-api-node")
 
 var client_id = '992f2aaaf07c467fb5fd757f91391847'; // Your client id
 var redirect_uri = 'http://localhost:3000'; // Your redirect uri
 
 const AUTH_URL = "https://accounts.spotify.com/authorize?response_type=token&client_id="+client_id+"&redirect_uri="+redirect_uri+"&scope=user-top-read&state=123"
 
-    export default function Login({accessToken}) {
+    export default function Login() {
 
       //const spotifyApi = new SpotifyWebApi();
       //spotifyApi.setAccessToken(accessToken);

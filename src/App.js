@@ -61,7 +61,6 @@ function WaveWash() {
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = { flood_down: false, flood_up: false };
   }
 
   render() {
