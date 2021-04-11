@@ -1,5 +1,8 @@
 import React, { Component, useState } from "react";
 
+import "bootstrap/dist/css/bootstrap.min.css";
+import "bootstrap/dist/css/bootstrap.css";
+
 import "./App.css";
 import "react-awesome-button/dist/styles.css";
 import "./my-button.css";
