@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
 
+.TunesBackground {
+    background-color: #4c753f;
+}
 .tunestop {
     font-family: "Raleway", sans-serif;
     margin-bottom: 40px;
@@ -8,7 +11,7 @@
     text-align: center;
   }
 
-p {
+p.tunes {
     font-family: "Raleway", sans-serif;
     font-size: 20px;
     margin-left: 5%;
@@ -17,14 +20,6 @@ p {
     text-align: center;
 }
 
-/* b {
-    font-family: "Raleway", sans-serif;
-    font-size: 20px;
-    margin-left: 5%;
-    margin-right: 5%;
-    color: #ffd68f;
-    text-align: center;
-} */
 
 ul {
     list-style: none;

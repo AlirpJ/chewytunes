@@ -18,10 +18,7 @@ var dict = {
   Sweet: false,
 };
 function transitionToEnd(props) {
-  const transitions = useTransition({
-    from: { opacity: 1, background: "#FFD68F" },
-    leave: { opacity: 0, delay: 500, background: "#4C753F" },
-  });
+  
   return <FlavorBasedTuneCurration dictonary={dict}></FlavorBasedTuneCurration>;
 }
 
@@ -72,7 +69,7 @@ function FlavorPage(props) {
       <body class="flavor-body">
         <div class="container">
           <div class="item itemA">
-            <AwesomeButton type="primary" onPress={() => UpdateDict("crunchy")}>
+            <AwesomeButton class="flavor" type="primary" onPress={() => UpdateDict("crunchy")}>
               Crunchy
             </AwesomeButton>
           </div>
@@ -80,12 +77,12 @@ function FlavorPage(props) {
             <p class="flavor-or">Or</p>
           </div>
           <div class="item itemC">
-            <AwesomeButton type="primary" onPress={() => UpdateDict("chewy")}>
+            <AwesomeButton class="flavor" type="primary" onPress={() => UpdateDict("chewy")}>
               Chewy
             </AwesomeButton>
           </div>
           <div class="item itemA">
-            <AwesomeButton type="primary" onPress={() => UpdateDict("spicy")}>
+            <AwesomeButton class="flavor" type="primary" onPress={() => UpdateDict("spicy")}>
               Spicy
             </AwesomeButton>
           </div>
@@ -93,12 +90,12 @@ function FlavorPage(props) {
             <p class="flavor-or">Or</p>
           </div>
           <div class="item itemC">
-            <AwesomeButton type="primary" onPress={() => UpdateDict("salty")}>
+            <AwesomeButton class="flavor" type="primary" onPress={() => UpdateDict("salty")}>
               Salty
             </AwesomeButton>
           </div>
           <div class="item itemA">
-            <AwesomeButton type="primary" onPress={() => UpdateDict("bitter")}>
+            <AwesomeButton class="flavor" type="primary" onPress={() => UpdateDict("bitter")}>
               Bitter
             </AwesomeButton>
           </div>
@@ -113,6 +110,7 @@ function FlavorPage(props) {
           <div class="empty"></div>
           <div class="done">
             <AwesomeButton
+              class="flavor"
               type="secondary"
               onPress={() => transitionToEnd({ dict })}
             >

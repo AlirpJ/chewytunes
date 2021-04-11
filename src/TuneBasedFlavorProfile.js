@@ -30,9 +30,9 @@ function TuneBasedFlavorProfile(props) {
   
   return (
     <div class="TunesBackground">
-      <h1 class="tunestop">Here are your food recommendations!</h1>
-      <p>{flavorStats[0]}</p>
-      <p class="bootlicker">How about trying Panera's Classic, Broccoli Cheddar Mac & Cheese!</p>
+      <h1 style={{color: "#ffd68f"}} class="tunestop">Here are your food recommendations!</h1>
+      <p style={{color: "#ffd68f"}}>{flavorStats[0]}</p>
+      <p style={{color: "#ffd68f"}} class="bootlicker">How about trying Panera's Classic, Broccoli Cheddar Mac & Cheese!</p>
       <p>(Here are the tracks we based your food selection on, in case you were curious):</p>
       <div class="container">
         {top10.map((value, index) => {
@@ -41,7 +41,8 @@ function TuneBasedFlavorProfile(props) {
               <a href={value[3]}>
                 <img src={value[0]}></img> 
               </a>
-              <p key={index}>{value[1] + " - " + value[2]}</p>
+              <p class="title" style={{color: "#ffd68f"}} key={index}>{value[1]}</p>
+              <p class="artist" style={{color: "#ffd68f"}}> {value[2]}</p>
             </div>
           );
         })}

@@ -31,7 +31,7 @@ function FlavorBasedTuneCurration(props) {
   }, [])
 
   return (
-    <div class="TunesBackground">
+    <div class="FlavorBasedTunesBackground">
       <h1 class="tunestop">Here are your delicious tunes</h1>
       <div class="tunesbody">
       {foodConstraints.length > 0 && 
