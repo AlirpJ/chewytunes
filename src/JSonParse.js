@@ -47,7 +47,7 @@ function getRandom(list) {
 // takes in flavors from front-end and maps them to various stats, which
 // are then used to calculate recommendations for someone's songs.
 // reccs are also based upon a user's personal taste so it's not totally ass
-async function mapFoodToRecs() {
+async function mapFoodToRecs(sweet, salty, crunchy) {
     // will take food items and return an artist, genre, and track to base recommendations 
     // off of. is it possible to grab all of those from a user's top songs? much to think about.
     // current structure of the food item request has a bunch of constraints:
@@ -57,11 +57,40 @@ async function mapFoodToRecs() {
     // These stats will all be adjusted based upon selected buttons from a user
     let topTracks = await getUserTopTracks();
     let topArtists = await getUserTopArtists();
+    let energy = 0;
+    let loudness = 0;
+    let danceability = 0;
+    if (sweet) {
+        energy = 0.7;
+        loudness = -6;
+        danceability = 0.65;
+        console.log("Sweet foods are complimented well by higher energy and higher pitched music.");
+        console.log("As a result, we're recommending some really high energy music that might suit your fancy.");
+    }
+    if (salty) {
+        loudness = -5;
+        energy = 0.45;
+        danceability = 0.5;
+        console.log("Salty foods are a good choice!");
+        console.log("Savory, salty foods are best copmlimented by more subtle, calming music.");
+        console.log("Spotify has 'energy' stats for tracks, which rate how much of a jam a song can be.");
+        console.log("We're gonna recommend some lower-energy tracks to really bring out the savory flavors in your meal.");
+        console.log("Trust me though, that doesn't make them any less of a bop!");
+    }
+    if (crunchy) {
+        loudness = -4;
+        console.log("Seems you like crunchy foods!");
+        console.log("Believe it or not, louder music helps amplify the 'crunch' you feel.");
+        console.log("We're recommending some tracks based on how much 'loudness' Spotify ranks them.");
+    }
     let constraints = {
         seed_genres: await getGenres(),
         seed_tracks: topTracks[0],
         seed_artists: topArtists[0],
-        min_popularity: 50
+        min_popularity: 50,
+        target_loudness: loudness,
+        target_energy: energy,
+        target_danceability: danceability
     };
     return constraints;
     // here's where we implement the logic from the buttons c:
@@ -155,7 +184,6 @@ async function mapStatsToFlavors() {
     let highDance = stats.danceability > 0.65 ? true : false
     let highEnergy = stats.energy > 0.65 ? true : false
     let loud = stats.loudness > -6.3 ? true : false
-    let lively = stats.liveness > 0.2 ? true : false
     let speedy = stats.tempo > 120 ? true : false 
     // here's where we put various checks for stats and recommend various
     // panera products based on that. i'm probably gonna randomize it a bit so that
@@ -175,7 +203,7 @@ async function mapStatsToFlavors() {
         console.log("Dance-y music and energy tends to lend itself well to");
         console.log("bold, sweet flavors. For you, I'm thinking something sweet");
         console.log("Wanna try something from Panera? How about a " + getRandom(SWEET_ITEMS) + "?");
-    } else if (lively) {
+    } else if (loud) {
         console.log("Seems like you like lively music!");
         console.log("Lively music tends to bring out many of the sweet and sour");
         console.log("flavors present in your food. I'm thinking something that");
