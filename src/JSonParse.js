@@ -110,7 +110,7 @@ export async function getRecommendation(spotifyApi, sweet, salty, crunchy) {
     let text = foodConstraints.txt
     let reccs = await spotifyApi.getRecommendations(foodConstraints.constr)
     for (let track of reccs.body.tracks) {
-        songRecs.push([track.name, track.artists[0].name, track.external_urls.spotify, track.album.images[1].url]);
+        songRecs.push([track.name, track.artists[0].name, track.album.images[1].url, track.external_urls.spotify]);
     }
     console.log(songRecs);
     return songRecs;
