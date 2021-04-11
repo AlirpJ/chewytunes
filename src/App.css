@@ -1,38 +1,80 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+
+.background {
+    height:100vh;
+    width:100vw;
+    position: relative;
+    overflow: hidden;
+    background: #FFD68F;
+}
+.background-green {
+    height:100vh;
+    width:100vw;
+    position: relative;
+    overflow: hidden;
+    background: #4C753F;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.top-half {
+    background-color: #FFD68F;
+    display: flex;
+    width: 100vw;
+    will-change: height;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.bottom-half {
+    background-color: #FFD68F;
+    display: flex;
+    width: 100vw;
+    will-change: height;
+    z-index: -1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+h1.top {
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 40px;
+    color: #4C753F;
 }
 
-.App-link {
-  color: #61dafb;
+h1.bottom {
+    font-family: 'Raleway', sans-serif;
+    margin-bottom: 40px;
+    color: #FFD68F;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.wave {
+    background-color: #FFD68F;
+    position: absolute;
+}
+
+.top-half-actions {
+    background-color: #FFD68F;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+}
+
+.bottom-half-actions {
+    width: 100%;
+    height: 50%;
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-flow: column wrap;
+}
+
+.bottom-option {
+    background-color: #FFD68F;
+    width: 100vw;
+    height: 100vh;
+}
+
+.top-option {
+    background-color: #4C753F;
+    width: 100vw;
+    height: 100vh;
 }

@@ -1,16 +1,68 @@
-import React from 'react';
-import { PaperContainer, Circle, Layer } from '@psychobolt/react-paperjs'
-import Login from "./Login"
-import Dashboard from "./Dashboard"
+import React, { Component, useState } from 'react';
+
 import "bootstrap/dist/css/bootstrap.min.css"
 import 'bootstrap/dist/css/bootstrap.css'
 
-const Shapes = () => <Circle center={[120, 50]} radius={35} fillColor="#00FF00" />;
+import './App.css';
+import "react-awesome-button/dist/styles.css";
+import "./my-button.css";
 
-var access_token = new URLSearchParams(window.location.hash).get('#access_token');
+import { useTransition } from '@react-spring/core';
+import { animated } from '@react-spring/web';
 
-function App() {
-  return access_token ? <Dashboard access_token = {access_token} /> : <Login />
+import WaveStatus from './WaveStatus'
+
+import UpOption from './UpOption'
+import BottomOption from './BottomOption'
+import NeutralOption from './NeutralOption'
+
+function WaveWash() {
+  const [waveStatus, setWaveStatus] = useState(WaveStatus.NEUTRAL) //First item is the state, Second item is an updater for the state
+
+  const transitions = useTransition(waveStatus, {
+    from: { opacity: 1, background: '#FFD68F'},
+    leave: { opacity: 0, delay: 500, background: '#4C753F' },
+    trail: 4000,
+  })
+
+  console.log(transitions);
+  return (
+    <div className={waveStatus === WaveStatus.WASH_UP ? 'background-green' : 'background' }>
+      { transitions((props, item, key) => {
+        return (
+          <animated.div key={key} style={props}>
+            { item === WaveStatus.WASH_UP &&
+              <div class="top-option">
+                <UpOption />
+              </div>
+            }
+            { item === WaveStatus.WASH_DOWN &&
+              <div class="bottom-option">
+                <BottomOption />
+              </div>
+            }
+            { item === WaveStatus.NEUTRAL &&
+              <NeutralOption waveStatus={waveStatus} setWaveStatus={setWaveStatus}/>
+            }
+          </animated.div>
+        )
+      })
+      }
+    </div>
+  )
+}
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { flood_down: false, flood_up: false };
+  }
+
+  render() {
+    return (
+      <WaveWash />
+    );
+  }
 }
 
 export default App;

@@ -11,7 +11,7 @@ var access_token = new URLSearchParams(window.location.hash).get('#access_token'
 
 export default function App() {
   return (
-      access_token ? <Dashboard access_token = {access_token} /> : <Login access_token = {access_token} />
+      access_token ? <Dashboard access_token = {access_token} /> : <Login />
   )
 }
 
