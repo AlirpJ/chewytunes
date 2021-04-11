@@ -25,7 +25,7 @@ export async function getTop50(spotifyApi) {
 async function getGenres(spotifyApi) {
     let genre = [];
     for (var i = 0; i < 3; i++) {
-        if (Math.random() > 0.33) {
+        if (Math.random() > 0.66) {
             genre.push('pop');
         } else {
             await spotifyApi.getAvailableGenreSeeds()
