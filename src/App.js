@@ -1,10 +1,7 @@
-import React from 'react';
-import Login from "./Login"
-import Dashboard from "./Dashboard"
+import React, { Component, useState } from 'react';
+
 import "bootstrap/dist/css/bootstrap.min.css"
 import 'bootstrap/dist/css/bootstrap.css'
-
-import React, { Component, useState } from 'react';
 
 import './App.css';
 import "react-awesome-button/dist/styles.css";
