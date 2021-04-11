@@ -22,7 +22,6 @@ function WaveWash() {
   const transitions = useTransition(waveStatus, {
     from: { opacity: 1, background: "#FFD68F" },
     leave: { opacity: 0, delay: 500, background: "#4C753F" },
-    trail: 4000,
   });
 
   console.log(transitions);

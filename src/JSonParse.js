@@ -1,17 +1,17 @@
 const { getCurrentUpdateLanePriority } = require('@psychobolt/react-paperjs/dist/index.dev');
 const SpotifyWebApi = require('spotify-web-api-node')
-const token = "BQCuwFjcHPQv7M-vxC7kXotw1b9LDjA8qJHuNQtuAh8R0C7wDxuJRq6gc6MwIC9Yiv1XM9Rf1B26Es1EDQSuCeefYAf-WXZkJOJs4fcZt4SBvoDt4T0LcTEX9e_fskmvDVuFmC6Qul5QlDXsOk62LO4XwTEdacCrzvbwV_fmF8V36vfl3BA1IWrh1EMZNZO7M7lzALe-d3O-pcYSXTX7T0kIwcAPhezNCMYQnkTewIEsbkhFz6qLQ-QDZBK_cem1Yq--mvxp9jt3oUBoZoqH"
+// const token = "BQAJrc9skfHoLOoEvy3BLds__TXA8AkVByR8bIQrhUjbJr9XCFUXs0G92Y1icPsHjykbnIV9flCye2I10HW84JYKg-RSudnPn8vxUv0VtFLlK9gCeBoeUhrPP8jh0FeBEXL0mFIAzl5Q9jR4iPR0QRTqXH1XFusaCXy2WdSVWvS14r3d2lR8pV6UbpEtChb7haPeu2BGErZyEEwtFhYhH85KS2K7WEVJk1SKToxPqc-G8uQF530_iRcKXQbBK4AHWg4uqa4VPnOdjexlfQrd"
 const playlistID = "37i9dQZEVXbLRQDuF5jeBp"
 
-const spotifyApi = new SpotifyWebApi();
-spotifyApi.setAccessToken(token);
+// const spotifyApi = new SpotifyWebApi();
+// spotifyApi.setAccessToken(token);
 
 // example function that grabs a top 50 playlist and parses it for the IDs of each song
 // which is currently logged to the console because i'm gay and can't figure out what
 // else to do with it for now
-async function getTop50() {
+export async function getTop50(spotifyApi) {
     const playlistData = await spotifyApi.getPlaylist(playlistID);
-    tracks = []
+    const tracks = []
     for (let track of playlistData.body.tracks.items) {
         tracks.push(track.track.id);
     }
@@ -22,9 +22,9 @@ async function getTop50() {
 // returns 3 genres which are used to seed the recommendation
 // 66% chance of being pop, 33% chance of being any random seedable genre
 // this leads to some wacky fucking shit lmao
-async function getGenres() {
+async function getGenres(spotifyApi) {
     let genre = [];
-    for (i = 0; i < 3; i++) {
+    for (var i = 0; i < 3; i++) {
         if (Math.random() > 0.33) {
             genre.push('pop');
         } else {
@@ -40,7 +40,7 @@ async function getGenres() {
 
 // helper function for the above to get a random element from the array 
 // can i make this into a lambda?
-function getRandom(list) {
+export function getRandom(list) {
     return list[Math.floor((Math.random()*list.length))];
 }
 
@@ -55,33 +55,33 @@ async function mapFoodToRecs(sweet, salty, crunchy) {
     //    crunchy or soft
     //    etc.
     // These stats will all be adjusted based upon selected buttons from a user
-    let topTracks = await getUserTopTracks();
-    let topArtists = await getUserTopArtists();
-    let energy = 0;
-    let loudness = 0;
-    let danceability = 0;
+    const topTracks = await getUserTopTracks();
+    const topArtists = await getUserTopArtists();
+    const energy = 0;
+    const loudness = 0;
+    const danceability = 0;
     if (sweet) {
         energy = 0.7;
         loudness = -6;
         danceability = 0.65;
-        console.log("Sweet foods are complimented well by higher energy and higher pitched music.");
+        console.log("Sweet foods are complimented well by higher energy and higher pitched music. ");
         console.log("As a result, we're recommending some really high energy music that might suit your fancy.");
     }
     if (salty) {
         loudness = -5;
         energy = 0.45;
         danceability = 0.5;
-        console.log("Salty foods are a good choice!");
-        console.log("Savory, salty foods are best copmlimented by more subtle, calming music.");
-        console.log("Spotify has 'energy' stats for tracks, which rate how much of a jam a song can be.");
-        console.log("We're gonna recommend some lower-energy tracks to really bring out the savory flavors in your meal.");
+        console.log("Salty foods are a good choice! ");
+        console.log("Savory, salty foods are best copmlimented by more subtle, calming music. ");
+        console.log("Spotify has 'energy' stats for tracks, which rate how much of a jam a song can be. ");
+        console.log("We're gonna recommend some lower-energy tracks to really bring out the savory flavors in your meal. ");
         console.log("Trust me though, that doesn't make them any less of a bop!");
     }
     if (crunchy) {
         loudness = -4;
-        console.log("Seems you like crunchy foods!");
-        console.log("Believe it or not, louder music helps amplify the 'crunch' you feel.");
-        console.log("We're recommending some tracks based on how much 'loudness' Spotify ranks them.");
+        console.log("Seems you like crunchy foods! ");
+        console.log("Believe it or not, louder music helps amplify the 'crunch' you feel. ");
+        console.log("We're recommending some tracks based on how much 'loudness' Spotify ranks them. Get ready for some absolute bangers!!");
     }
     let constraints = {
         seed_genres: await getGenres(),
@@ -99,7 +99,7 @@ async function mapFoodToRecs(sweet, salty, crunchy) {
 // uses users music taste and front-end flavor selection to generate a profile of music
 // recommendations to enchance user's ability to taste...?
 // i still can't believe this is real
-async function getRecommendation(sweet, salty, crunchy) {
+async function getRecommendation(spotifyApi, sweet, salty, crunchy) {
     // take in an artist, genre, and track, and generate recs based on those
     // obtain those from a user's top tracks in combination with food-based
     // constraints form above. the constraints come from mapFoodToRecs()
@@ -115,18 +115,17 @@ async function getRecommendation(sweet, salty, crunchy) {
 }
 
 // grabs a user's top 10 tracks
-async function getUserTopTracks() {
+export async function getUserTopTracks(spotifyApi) {
     let topTrack = [];
     const topTracks = await spotifyApi.getMyTopTracks({limit : 10});
     for (let track of topTracks.body.items) {
         topTrack.push(track.id);
     }
-    console.log(topTrack);
     return topTrack;
 }
 
 // grabs a user's top 10 artists
-async function getUserTopArtists() {
+async function getUserTopArtists(spotifyApi) {
     let topArtist = [];
     const topArtists = await spotifyApi.getMyTopArtists({limit : 10});
     for (let artist of topArtists.body.items) {
@@ -139,14 +138,14 @@ async function getUserTopArtists() {
 // analyses a user's top 10 songs and retrieves the average of a couple stats
 // these averages are used as thresholds to recommend different food items
 // based on what type of music these bitches listen to
-async function getTopStats() {
-    let topTracks = await getUserTopTracks();
-    dances = [];
-    energy = [];
-    loudness = [];
-    liveness = [];
-    tempo = [];
-    for (track of topTracks) {
+async function getTopStats(spotifyApi) {
+    let topTracks = await getUserTopTracks(spotifyApi);
+    const dances = [];
+    const energy = [];
+    const loudness = [];
+    const liveness = [];
+    const tempo = [];
+    for (const track of topTracks) {
         let trackFeatures = await spotifyApi.getAudioFeaturesForTrack(track);
         dances.push(trackFeatures.body.danceability);
         energy.push(trackFeatures.body.energy);
@@ -155,18 +154,18 @@ async function getTopStats() {
         tempo.push(trackFeatures.body.tempo);
     }
     const average = arr => arr.reduce((sume, el) => sume + el, 0) / arr.length;
-    returnValues = {
+    const returnValues = {
         danceability: average(dances),
         energy: average(energy),
         loudness: average(loudness),
         liveness: average(liveness),
         tempo: average(tempo)
     }
-    console.log(returnValues);
+    // console.log(returnValues);
     return returnValues;
 }
 
-async function mapStatsToFlavors() {
+export async function mapStatsToFlavors(spotifyApi) {
     // stats here is a dicitionary containing the following stats:
     // danceability
     // energy
@@ -180,7 +179,7 @@ async function mapStatsToFlavors() {
     // ---------------------------------------------------------------------------
     // all of these stats are based on averages obtained from running
     // getTopStats() on the top 50 tracks playlist from spotify 
-    let stats = await getTopStats();
+    let stats = await getTopStats(spotifyApi);
     let highDance = stats.danceability > 0.65 ? true : false
     let highEnergy = stats.energy > 0.65 ? true : false
     let loud = stats.loudness > -6.3 ? true : false
@@ -190,45 +189,59 @@ async function mapStatsToFlavors() {
     // each thing gets recommended and that the project doesn't get stale 
     if (highEnergy) {
         // front end, this is all yours to fuck with. go wild. these are recommendations
-        console.log("Seems like you enjoy pretty energetic music!");
-        console.log("Energetic music tends to bring out the sweeter flavors in food,");
-        console.log("And helps your taste buds detect more of the sweet tones.");
-        console.log("Additionally, energetic music tends to be loud.");
-        console.log("Loudness, for some reason, tends to bring out the 'crunch' in some foods.");
-        console.log("For you, I think I'd recommend a salad.");
-        console.log("Interested in a Panera item? What about a " + getRandom(SUMMERY_ITEMS) + "?");
+        const highEnergyString = "Seems like you enjoy pretty energetic music! Energetic music tends to bring out the sweeter flavors in food, and" 
+         + "helps your taste buds detect more of the sweet tones. "
+         + "Additionally, energetic music tends to be loud. "
+         + "Loudness, for some reason, tends to bring out the 'crunch' in some foods. "
+         + "For you, I think I'd recommend a salad. "
+         + "Interested in a Panera item? What about a "
+         return [highEnergyString, SUMMERY_ITEMS]
     } else if (highDance) {
-        console.log("Seems like you're a fan of dance-y music.");
-        console.log("Your top tracks have a lot of energy in them! I like it!");
-        console.log("Dance-y music and energy tends to lend itself well to");
-        console.log("bold, sweet flavors. For you, I'm thinking something sweet");
-        console.log("Wanna try something from Panera? How about a " + getRandom(SWEET_ITEMS) + "?");
+        const highDanceString = "Seems like you're a fan of dance-y music. "
+        + "Your top tracks have a lot of energy in them! I like it! "
+        + "Dance-y music and energy tends to lend itself well to"
+        + "bold, sweet flavors. For you, I'm thinking something sweet"
+        + "Wanna try something from Panera? How about a "
+        return [highDanceString, SWEET_ITEMS]
     } else if (loud) {
-        console.log("Seems like you like lively music!");
-        console.log("Lively music tends to bring out many of the sweet and sour");
-        console.log("flavors present in your food. I'm thinking something that");
-        console.log("can get the best of both worlds. How about a salad of some sort?");
-        console.log("Bold flavors are another big thing with lively music, so");
-        console.log("maybe you'd like to try a BBQ Chicken Salad?");
-        console.log("I hear Panera has a really good one...");
+        const loudString = "Seems like you like lively music!"
+        + "Lively music tends to bring out many of the sweet and sour"
+        + "flavors present in your food. I'm thinking something that"
+        + "can get the best of both worlds. How about a salad of some sort? "
+        + "Bold flavors are another big thing with lively music, so"
+        + "maybe you'd like to try a BBQ Chicken Salad?"
+        + "I hear Panera has a really good one..."
+        return [loudString]
     } else if (speedy) {
-        console.log("You're a fan of fast-paced music, aren't you?");
-        console.log("At least, that's what your top tracks imply.");
-        console.log("Music with a high tempo tends to energize us");
-        console.log("High energy and food don't always go together, according to research");
-        console.log("We tend to eat faster and as a result miss out on a lot of the flavor.");
-        console.log("Funny enough, high energy music also brings out mroe savory flavors");
-        console.log("Sounds like a wonderful pairing with a good soup!");
-        console.log("Now, how about a Panera soup? Let's say... a " + getRandom(SOUPS) + "?");
+        const speedyString = "You're a fan of fast-paced music, aren't you?"
+        + "At least, that's what your top tracks imply."
+        + "Music with a high tempo tends to energize us"
+        + "High energy and food don't always go together, according to research"
+        + "We tend to eat faster and as a result miss out on a lot of the flavor. "
+        + "Funny enough, high energy music also brings out more savory flavors"
+        + "Sounds like a wonderful pairing with a good soup! "
+        + "Now, how about a Panera soup? Let's say... a "
+        return [speedyString, SOUPS]
     } else {
-        console.log("Hm...seems like you're into more relaxed music.");
-        console.log("Slower jams, perhaps?");
-        console.log("Slower tunes tend to bring out more subtle flavors.");
-        console.log("Something nice, warm, and savory would probably suit you best.");
-        console.log("What about a " + getRandom(SAVORY_ITEMS) + " from Panera?");
+        const savoryString = "Hm...seems like you're into more relaxed music. "
+        + "Slower jams, perhaps? "
+        + "Slower tunes tend to bring out more subtle flavors. "
+        + "Something nice, warm, and savory would probably suit you best. "
+        + "What about a "
+        return [savoryString, SAVORY_ITEMS]
     }
 }
  
+export async function getUserTopSongs(spotifyApi) {
+    let songRecs = []
+    let songs = await spotifyApi.getMyTopTracks();
+    for (const track of songs.body.items) {
+        songRecs.push([track.name, track.artists[0].name, track.external_urls.spotify, track.album.images[1].url])
+    }
+    console.log(songRecs);
+    return songRecs;
+}
+
 // panera bread menu items lmfao
 const SAVORY_ITEMS = [
     "Pepperoni Flatbread Pizza",
@@ -307,6 +320,7 @@ const SUMMERY_ITEMS = [
 
 // calls the functions as needed for testing purposes
 // getTop50();
-getRecommendation();
+// getRecommendation();
 // getTopStats();
-mapStatsToFlavors();
+// mapStatsToFlavors();
+// getUserTopSongs();
