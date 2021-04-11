@@ -1,126 +1,68 @@
 import React, { Component, useState } from "react";
-import Wave from "react-wavify";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-} from "react-router-dom";
+
 import "./App.css";
-import useMeasure from "./useMeasure";
-import { AwesomeButton } from "react-awesome-button";
 import "react-awesome-button/dist/styles.css";
 import "./my-button.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faChevronUp } from "@fortawesome/free-solid-svg-icons";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { useSpring, animated } from "react-spring";
-import TunesPage from "./components/TunesPage";
-import HomePage from "./components/HomePage";
-/*
-var fly_up = false;
-var fly_down = false;
+
+import { useTransition } from "@react-spring/core";
+import { animated } from "@react-spring/web";
+
+import WaveStatus from "./WaveStatus";
+
+import UpOption from "./UpOption";
+import BottomOption from "./BottomOption";
+import NeutralOption from "./NeutralOption";
 
 function WaveWash() {
-  const top_half_props = useSpring({
-    from: { height: "50vh", top: "0", bottom: "0" },
-    to: async (next) => {
-      while (false) {
-        await next({ height: "100vh" });
-        await next({ height: "0vh" });
-        await next({ height: "50vh" });
-        // await next({ height: '50vh' })
-        // await next({ height: '100vh' })
-        // await next({ height: '50vh' })
-        // await next({ height: '0vh' })
-      }
-    },
+  const [waveStatus, setWaveStatus] = useState(WaveStatus.NEUTRAL); //First item is the state, Second item is an updater for the state
+
+  const transitions = useTransition(waveStatus, {
+    from: { opacity: 1, background: "#FFD68F" },
+    leave: { opacity: 0, delay: 500, background: "#4C753F" },
+    trail: 4000,
   });
 
-  const bottom_half_props = useSpring({
-    from: { height: "50vh", top: "0", bottom: "0" },
-    to: async (next) => {
-      while (false) {
-        await next({ height: "0vh" });
-        await next({ height: "100vh" });
-        await next({ height: "50vh" });
-        // await next({ height: '50vh' })
-        // await next({ height: '0vh' })
-        // await next({ height: '50vh' })
-        // await next({ height: '100vh' })
-      }
-    },
-  });
-
+  console.log(transitions);
   return (
-    <div class="background">
-      <animated.div class="top-half" style={top_half_props}>
-        <TopHalfAnimated />
-      </animated.div>
-      <animated.div class="background" style={bottom_half_props}>
-        <BottomHalfAnimated />
-        <div class="bottom-half">
-          <Wave
-            fill="#4C753F"
-            class="wave"
-            paused={false}
-            options={{
-              height: 10,
-              amplitude: 20,
-              speed: 0.25,
-              points: 5,
-            }}
-          />
-        </div>
-      </animated.div>
+    <div
+      className={
+        waveStatus === WaveStatus.WASH_UP ? "background-green" : "background"
+      }
+    >
+      {transitions((props, item, key) => {
+        return (
+          <animated.div key={key} style={props}>
+            {item === WaveStatus.WASH_UP && (
+              <div class="top-option">
+                <UpOption />
+              </div>
+            )}
+            {item === WaveStatus.WASH_DOWN && (
+              <div class="bottom-option">
+                <BottomOption />
+              </div>
+            )}
+            {item === WaveStatus.NEUTRAL && (
+              <NeutralOption
+                waveStatus={waveStatus}
+                setWaveStatus={setWaveStatus}
+              />
+            )}
+          </animated.div>
+        );
+      })}
     </div>
   );
 }
-function TopHalfAnimated() {
-  var props = useSpring({ opacity: 1, from: { opacity: 0 }, mass: 500 });
-  return (
-    <animated.div class="top-half-actions" style={props}>
-      <h1 class="top"> Find me foods that go with my favorite tunes </h1>
-      <AwesomeButton
-        type="secondary"
-        onPress={() => {
-          fly_down = true;
-        }}
-      >
-        <FontAwesomeIcon icon={faChevronUp} size="2x" />
-      </AwesomeButton>
-    </animated.div>
-  );
-}
-
-function BottomHalfAnimated() {
-  var props = useSpring({ opacity: 1, from: { opacity: 0 } });
-  return (
-    <animated.div class="bottom-half-actions" style={props}>
-      <h1 class="bottom"> Find me tunes that will go with my current meal </h1>
-      <AwesomeButton type="primary" onPress={() => WaveWash()}>
-        <FontAwesomeIcon icon={faChevronDown} size="2x" />
-      </AwesomeButton>
-    </animated.div>
-  );
-}*/
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { flood_down: false, flood_up: false };
+  }
+
   render() {
-    return (
-      <Router>
-        <div>
-          <Switch>
-            <Route exact path="/tunespage">
-              <TunesPage />
-            </Route>
-            <Route exact path="/">
-              <HomePage />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
-    );
+    return <WaveWash />;
   }
 }
 
