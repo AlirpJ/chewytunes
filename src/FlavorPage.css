@@ -1,0 +1,85 @@
+.flavorPage {
+  background-color: #ffd68f;
+  position: fixed;
+  overflow: auto;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.flavor-header {
+  font-family: "Raleway", sans-serif;
+  margin-bottom: 2%;
+  margin-top: 7%;
+  color: #4c753f;
+  text-align: center;
+}
+
+.flavor-or {
+  font-family: "Raleway", sans-serif;
+  color: #4c753f;
+  text-align: center;
+  font-size: 30px;
+  justify-content: center;
+}
+
+.flavor-body {
+  background-color: #ffd68f;
+}
+.tunestop {
+  font-family: "Raleway", sans-serif;
+  margin-bottom: 40px;
+  margin-top: 40px;
+  color: #ffd68f;
+  text-align: center;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 3rem 3rem 3rem;
+  grid-template-columns: 15rem 15rem 15rem;
+  gap: 50% 0%;
+  justify-items: center;
+  align-items: center;
+  margin-top: 4%;
+  margin-left: 30%;
+  margin-right: 30%;
+  margin-bottom: 12%;
+}
+
+.aws-btn {
+  --button-default-height: 60px;
+
+  --button-default-font-size: 20px;
+  --button-default-border-radius: 22px;
+  --button-horizontal-padding: 100px;
+  --button-raise-level: 5px;
+  --button-hover-pressure: 2;
+  --transform-speed: 0.185s;
+  --button-primary-color: #ffffff;
+  --button-primary-color-dark: #ffffff;
+  --button-primary-color-light: #4d6b3d;
+  --button-primary-color-hover: #e6e2db;
+  --button-primary-color-active: #ebe9e7;
+  --button-primary-border: 0px solid #ffffff;
+  --button-secondary-color: #527540;
+  --button-secondary-color-dark: #ecdabb;
+  --button-secondary-color-light: #fbd490;
+  --button-secondary-color-hover: #4d6b3d;
+  --button-secondary-color-active: #364b2b;
+  --button-secondary-border: 0px solid #2f4125;
+  --button-anchor-color: #95d44a;
+  --button-anchor-color-dark: #52a934;
+  --button-anchor-color-light: #3f8228;
+  --button-anchor-color-hover: #89cf35;
+  --button-anchor-border: 2px solid #5bbd3a;
+}
+
+.selection {
+  font-family: "Raleway", sans-serif;
+  font-size: 20px;
+  text-align: center;
+  align-content: center;
+  justify-content: center;
+}
