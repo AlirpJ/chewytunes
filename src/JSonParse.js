@@ -20,8 +20,9 @@ async function getTop50() {
     return tracks;
 }
 
-// populates the global variable "genre" with a random genre;
-// 66% chance of being pop, 33% chance of being something random
+// returns 3 genres which are used to seed the recommendation
+// 66% chance of being pop, 33% chance of being any random seedable genre
+// this leads to some wacky fucking shit lmao
 async function getGenres() {
     let genre = [];
     for (i = 0; i < 3; i++) {
@@ -38,10 +39,15 @@ async function getGenres() {
     return genre;
 }
 
+// helper function for the above to get a random element from the array 
+// can i make this into a lambda?
 function getRandomGenre(listOfGenres) {
     return listOfGenres[Math.floor((Math.random()*listOfGenres.length))];
 }
 
+// takes in flavors from front-end and maps them to various stats, which
+// are then used to calculate recommendations for someone's songs.
+// reccs are also based upon a user's personal taste so it's not totally ass
 async function mapFoodToRecs() {
     // will take food items and return an artist, genre, and track to base recommendations 
     // off of. is it possible to grab all of those from a user's top songs? much to think about.
@@ -62,6 +68,9 @@ async function mapFoodToRecs() {
     // here's where we implement the logic from the buttons c:
 }
 
+// uses users music taste and front-end flavor selection to generate a profile of music
+// recommendations to enchance user's ability to taste...?
+// i still can't believe this is real
 async function getRecommendation() {
     // take in an artist, genre, and track, and generate recs based on those
     // obtain those from a user's top tracks in combination with food-based
@@ -76,7 +85,7 @@ async function getRecommendation() {
     console.log(songRecs);
 }
 
-// grabs a user's top track to seed the recommendation
+// grabs a user's top 10 tracks
 async function getUserTopTracks() {
     let topTrack = [];
     const topTracks = await spotifyApi.getMyTopTracks({limit : 10});
@@ -87,7 +96,7 @@ async function getUserTopTracks() {
     return topTrack;
 }
 
-// grabs a user's top artist to seed the reccomendation
+// grabs a user's top 10 artists
 async function getUserTopArtists() {
     let topArtist = [];
     const topArtists = await spotifyApi.getMyTopArtists({limit : 10});
@@ -98,10 +107,10 @@ async function getUserTopArtists() {
     return topArtist;
 }
 
+// analyses a user's top 10 songs and retrieves the average of a couple stats
+// these averages are used as thresholds to recommend different food items
+// based on what type of music these bitches listen to
 async function getTopStats() {
-    // this analyzes songs from a users's top 10 
-    // for stats, and then returns a dict of stats
-    // for use in another function to recc food items.
     let topTracks = await getUserTopTracks();
     dances = [];
     energy = [];
@@ -138,7 +147,9 @@ async function mapStatsToFlavors(stats) {
     // these stats will be used to calculate what kind of music someone should listen to
     // i.e. high avg tempo -> something more energetic
     // high loudness -> crunchy shit
+
 }
+
 // calls the functions as needed
 // getRecommendation();
 // getTopStats();
